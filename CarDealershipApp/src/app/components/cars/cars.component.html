@@ -1,0 +1,31 @@
+<div class="container-fluid">
+  <h1>Coches</h1>
+
+
+  <div class="cars table-responsive">
+    <table class="table">
+      <tr *ngFor="let car of cars">
+        <td>
+          {{car.CarNumberPlate}}
+        <td>
+        <td>
+          {{car.CarDealership.Name}}
+        </td>
+        <td>
+          {{car.Brand.Name}}
+        </td>
+        <td>
+          {{car.Kilometers}}
+        </td>
+        <td>
+            <app-car-modal [carDealerships]="carDealerships" [brands]="brands" [car]="car" (newCar)="editCar($event)" [titleText]="editCarLabel"></app-car-modal>
+        </td>
+        <td>
+          <button class="btn btn-lg btn-outline-primary" (click)="removeCar(car)">Borrar coche</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <app-car-modal [carDealerships]="carDealerships" [brands]="brands" [car]="" (newCar)="addCar($event)" [titleText]="addCarLabel"></app-car-modal>
+</div>

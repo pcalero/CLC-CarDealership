@@ -1,0 +1,36 @@
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{titleText}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label>Matrícula</label>
+      <input type="text" name="CarNumberPlate" class="form-control" [(ngModel)]="resultCar.CarNumberPlate" required />
+    </div>
+    <div class="form-group">
+      <label>Concesionario</label>
+      <select name="CarDealership" class="form-control" [(ngModel)]="resultCar.CarDealershipID" required>
+        <option *ngFor="let carDealership of carDealerships" [value]="carDealership.CarDealershipID">{{carDealership.Name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Marca</label>
+      <select name="Brand" class="form-control" [(ngModel)]="resultCar.BrandID" required>
+        <option *ngFor="let brand of brands" [value]="brand.BrandID">{{brand.Name}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Kilómetros</label>
+      <input type="text" name="Kilometers" class="form-control" [(ngModel)]="resultCar.Kilometers" (keypress)="numberOnly($event)" required/>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="save()" [disabled]="resultCar.CarNumberPlate == '' || resultCar.CarNumberPlate == undefined || resultCar.CarDealershipID == '' || resultCar.CarDealershipID == undefined || resultCar.BrandID == '' || resultCar.BrandID == undefined || resultCar.Kilometers == '' || resultCar.Kilometers == undefined ">Guardar</button>
+  </div>
+</ng-template>
+
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">{{titleText}}</button>
